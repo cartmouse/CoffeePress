@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "CoffeePress.h"
 
 //==============================================================================
 /**
@@ -55,9 +56,9 @@ public:
 
 private:
 
-    float threshold, ratio, knee, makeUpGain;
-    int attackTimeMS, releaseTimeMS;
-
+    juce::Array<CoffeePress> allPresses;
+    juce::AudioProcessorValueTreeState state;
+    std::atomic<float>* thresholdParam, * slopeParam, * kneeParam, * attackParam, * releaseParam;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CoffeePressAudioProcessor)

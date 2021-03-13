@@ -10,6 +10,7 @@
 
 #pragma once
 #include <JuceHeader.h>
+#include "CircularBuffer.h"
 
 class CoffeePress
 {
@@ -18,6 +19,6 @@ public:
     ~CoffeePress() {};
     float CompressSample(float data, float threshold, float ratio, float attackTime, float releaseTime, float knee);
 private:
-    juce::dsp::DelayLine<float> buffer;
+    CircularBuffer buffer;
     float timeAverage, rms, gain;
 };

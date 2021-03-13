@@ -5,6 +5,10 @@
               pluginFormats="buildVST3" companyName="CartMouse">
   <MAINGROUP id="D1lGuV" name="CoffeePress">
     <GROUP id="{932A4A6F-2DDA-35EE-862E-44BED8F267E2}" name="Source">
+      <FILE id="mI7Agm" name="CircularBuffer.cpp" compile="1" resource="0"
+            file="Source/CircularBuffer.cpp"/>
+      <FILE id="FEP2gr" name="CircularBuffer.h" compile="0" resource="0"
+            file="Source/CircularBuffer.h"/>
       <FILE id="QVdeWr" name="CoffeePress.cpp" compile="1" resource="0" file="Source/CoffeePress.cpp"/>
       <FILE id="vsEthR" name="CoffeePress.h" compile="0" resource="0" file="Source/CoffeePress.h"/>
       <FILE id="KFTXH2" name="PluginProcessor.cpp" compile="1" resource="0"

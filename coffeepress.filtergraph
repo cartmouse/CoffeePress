@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FILTERGRAPH>
-  <FILTER uid="11" x="0.5" y="0.1" DPIAware="">
+  <FILTER uid="11" x="0.5" y="0.1" DPIAware="0.0">
     <PLUGIN name="Audio Input" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="JUCE" version="1.0" file="" uid="246006c0" isInstrument="0"
             fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="2"
@@ -16,7 +16,7 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="12" x="0.25" y="0.1" DPIAware="">
+  <FILTER uid="12" x="0.2493702770780857" y="0.1028225806451613" DPIAware="0.0">
     <PLUGIN name="MIDI Input" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="JUCE" version="1.0" file="" uid="a9e4f9eb" isInstrument="0"
             fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="0"
@@ -31,7 +31,7 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="13" x="0.5" y="0.9" DPIAware="">
+  <FILTER uid="13" x="0.5" y="0.9" DPIAware="0.0">
     <PLUGIN name="Audio Output" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="JUCE" version="1.0" file="" uid="724248cb" isInstrument="0"
             fileTime="0" infoUpdateTime="0" numInputs="6" numOutputs="0"
@@ -46,7 +46,7 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="14" x="0.25" y="0.9" DPIAware="">
+  <FILTER uid="14" x="0.25" y="0.9" DPIAware="0.0">
     <PLUGIN name="MIDI Output" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="JUCE" version="1.0" file="" uid="9d5bbb00" isInstrument="0"
             fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="0"
@@ -61,12 +61,13 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="15" x="0.3551637279596978" y="0.5907258064516129" DPIAware="">
+  <FILTER uid="15" x="0.3652392947103275" y="0.5544354838709677" DPIAware="0.0"
+          uiLastX_Normal="104" uiLastY_Normal="423" uiopen_Normal="1">
     <PLUGIN name="CoffeePress" format="VST3" category="Fx" manufacturer="CartMouse"
             version="1.0.0" file="C:\Users\tom-c\Documents\_audio\CoffeePress\Builds\VisualStudio2019\x64\Debug\VST3\CoffeePress.vst3"
-            uid="e9564360" isInstrument="0" fileTime="1782b649d83" infoUpdateTime="1782b6675ad"
+            uid="e9564360" isInstrument="0" fileTime="1782c0e90f7" infoUpdateTime="1782c15fa94"
             numInputs="2" numOutputs="2" isShell="0"/>
-    <STATE>191.VMjLgXK....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+    <STATE>552.VMjLg7g....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9LyLv3hUMoFSmQETt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzS1UDahcFLwHVN1MDUAkTUP0TPRokZvjFRmE0QicVSwnEZtf1XmcmUisFLogDdtj1R1gDdKkicCQUPIUETMEjTZoFLogTbzXUVqkjPHESQFEFLUY0Sn4RZKYGR3sTN1MDUAkTUP0TPRokZvjFR3UjQi8FNrgjYXcEVxU0UYgCRRwDdyHTSxn1TNQiZS0jdHkFS4gUdLkGR3sTN1MDUAkTUP0TPRokZvjFR3UkQgsVQwH1ZIIDRwTjQgASUV8DZDMkSzLiTNQiZS4zLPkWS5QTZLcmKS4DZ2f1S23RUPIUQTMkYpYTV3fjPi4VRWkUdmESXxEEaHYFVWgkbUcUV3fjTKQyLRwjLtLDS1QzTNMCSo0jdHMUSxXVZHU2LC8TctbEV3UjUgkGMC4hKt3hKt3hKt3hKlIUUMQUTPkzUZESQFM1ZQQEV5UjQtDDQlAEMAcEV40zQtDDQ14hK5EjKt3hKt3hKt3hRUACTEEzZh8VVWgkdUYTTmE0UXwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C.</STATE>
     <LAYOUT>
       <INPUTS>
         <BUS index="0" layout="L R"/>
@@ -76,7 +77,7 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="16" x="0.1914357682619647" y="0.3225806451612903" DPIAware="">
+  <FILTER uid="16" x="0.1914357682619647" y="0.3225806451612903" DPIAware="0.0">
     <PLUGIN name="Sine Wave Synth" format="Internal" category="Synth" manufacturer="JUCE"
             version="1.0.0" file="Sine Wave Synth" uid="16fd76a8" isInstrument="1"
             fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="2"
@@ -89,9 +90,9 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
+  <CONNECTION srcFilter="11" srcChannel="1" dstFilter="15" dstChannel="0"/>
+  <CONNECTION srcFilter="11" srcChannel="1" dstFilter="15" dstChannel="1"/>
   <CONNECTION srcFilter="12" srcChannel="4096" dstFilter="16" dstChannel="4096"/>
   <CONNECTION srcFilter="15" srcChannel="0" dstFilter="13" dstChannel="0"/>
   <CONNECTION srcFilter="15" srcChannel="1" dstFilter="13" dstChannel="1"/>
-  <CONNECTION srcFilter="16" srcChannel="0" dstFilter="15" dstChannel="0"/>
-  <CONNECTION srcFilter="16" srcChannel="1" dstFilter="15" dstChannel="1"/>
 </FILTERGRAPH>

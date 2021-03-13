@@ -20,14 +20,37 @@ CoffeePressAudioProcessor::CoffeePressAudioProcessor()
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
                        )
+    ,
+    state(*this, nullptr, juce::Identifier("params"), {
+            std::make_unique<juce::AudioParameterFloat>(
+                "threshold",
+                "Threshold",
+                juce::NormalisableRange<float>(-60.0f, 20.0f, 0.01f),
+                10.0f),
+            std::make_unique<juce::AudioParameterFloat>(
+                "ratio",
+                "Ratio",
+                juce::NormalisableRange<float>(1.0f, 20.0f, 0.01f),
+                2.0f),
+            std::make_unique<juce::AudioParameterFloat>(
+                "knee",
+                "Knee",
+                juce::NormalisableRange<float>(0.0f, 24.0f, 0.01f),
+                0.0f),
+            std::make_unique<juce::AudioParameterFloat>(
+                "attack",
+                "Attack",
+                juce::NormalisableRange<float>(0.01f, 500.0f, 0.01f),
+                100.0f),
+            std::make_unique<juce::AudioParameterFloat>(
+                "release",
+                "Reelase",
+                juce::NormalisableRange<float>(0.01f, 2000.0f, 0.01f),
+                500.0f),
+        }
+    )
 #endif
 {
-    threshold = -10.0;
-    ratio = 1.0;
-    knee = 0.0;
-    makeUpGain = 0.0;
-    attackTimeMS = 10;
-    releaseTimeMS = 50;
 }
 
 CoffeePressAudioProcessor::~CoffeePressAudioProcessor()
@@ -99,8 +122,16 @@ void CoffeePressAudioProcessor::changeProgramName (int index, const juce::String
 //==============================================================================
 void CoffeePressAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    for (int channel = 0; channel < getTotalNumOutputChannels(); channel++)
+    {
+        allPresses.add(CoffeePress());
+    }
+
+    thresholdParam = state.getRawParameterValue("threshold");
+    slopeParam = state.getRawParameterValue("ratio");
+    kneeParam = state.getRawParameterValue("knee");
+    attackParam = state.getRawParameterValue("attack");
+    releaseParam = state.getRawParameterValue("release");
 }
 
 void CoffeePressAudioProcessor::releaseResources()
@@ -137,30 +168,17 @@ bool CoffeePressAudioProcessor::isBusesLayoutSupported (const BusesLayout& layou
 
 void CoffeePressAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
-    juce::ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels  = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
+    float at = 1 - std::pow(juce::MathConstants<float>::euler, ((1 / getSampleRate()) * -2.2f) / (*attackParam / 1000.0f));
+    float rt = 1 - std::pow(juce::MathConstants<float>::euler, ((1 / getSampleRate()) * -2.2f) / (*attackParam / 1000.0f));
 
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels.
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
-
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    for (int i = 0; i < buffer.getNumSamples(); i++)
     {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+        for (int channel = 0; channel < getTotalNumOutputChannels(); channel++)
+        {
+            auto* data = buffer.getWritePointer(channel);
+            CoffeePress* press = &allPresses.getReference(channel);
+            data[i] = press->CompressSample(data[i], *thresholdParam, *slopeParam, at, rt, *kneeParam);
+        }
     }
 }
 
@@ -172,21 +190,23 @@ bool CoffeePressAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* CoffeePressAudioProcessor::createEditor()
 {
-    return new CoffeePressAudioProcessorEditor (*this);
+    return new CoffeePressAudioProcessorEditor (*this, state);
 }
 
 //==============================================================================
 void CoffeePressAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+    auto stateTree = state.copyState();
+    std::unique_ptr<juce::XmlElement> xml(stateTree.createXml());
+    copyXmlToBinary(*xml, destData);
 }
 
 void CoffeePressAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+    std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
+    if (xmlState.get() != nullptr && xmlState->hasTagName(state.state.getType())) {
+        state.replaceState(juce::ValueTree::fromXml(*xmlState));
+    }
 }
 
 //==============================================================================
